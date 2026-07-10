@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 /**
  * PHP version of mysqldump cli that comes with MySQL.
  *

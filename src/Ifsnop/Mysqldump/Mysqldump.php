@@ -181,16 +181,10 @@ class Mysqldump
         $this->pass = $pass;
         $this->parseDsn($dsn);
 
-// This drops MYSQL dependency, only use the constant if it's defined.
-if ("mysql" === $this->dbType) {
-
-    if (defined('Pdo\\Mysql::ATTR_USE_BUFFERED_QUERY')) {
-        $this->pdoSettingsDefault[Pdo\Mysql::ATTR_USE_BUFFERED_QUERY] = false;
-    } elseif (defined('PDO::MYSQL_ATTR_USE_BUFFERED_QUERY')) {
-        $this->pdoSettingsDefault[PDO::MYSQL_ATTR_USE_BUFFERED_QUERY] = false;
-    }
-
-}
+        // This drops MYSQL dependency, only use the constant if it's defined.
+        if ("mysql" === $this->dbType) {
+            $this->pdoSettingsDefault[PDO::MYSQL_ATTR_USE_BUFFERED_QUERY] = false;
+        }
 
         $this->pdoSettings = array_replace_recursive($this->pdoSettingsDefault, $pdoSettings);
         $this->dumpSettings = array_replace_recursive($this->dumpSettingsDefault, $dumpSettings);
